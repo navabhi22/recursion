@@ -1,0 +1,20 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        ArrayList<String> list = new ArrayList<String>();
+        par(n,0,0,"",list);
+        return list;
+    }
+    public static void par(int n, int op, int cl, String path, ArrayList<String> list) {
+		if(cl>n || op > n) {
+			return;
+		}
+		if(cl==n) {
+			list.add(path);
+			return;
+		}
+		par(n,op+1,cl,path+"(",list);
+		if(cl<op) {
+			par(n,op,cl+1,path+")",list);
+		}
+	}
+}
