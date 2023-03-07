@@ -1,0 +1,51 @@
+
+
+Take as input N. N is the number of rows and columns on a square board. Our player starts in top-left corner of the board and must reach bottom-right corner. In one move the player can move 1 step horizontally (right) or 1 step vertically (down) or 1 step diagonally (south-east). But the diagonal step is allowed only when the player is currently on one of the diagonals (there are two diagonals)
+
+Write a recursive function which:
+a. Returns the count of different ways the player can travel across the board. Print the value returned.
+b. Prints moves for all valid paths across the board.
+Input Format
+
+Enter the number N.
+Constraints
+
+None
+Output Format
+
+Display the total number of paths and display all the possible paths in a space separated manner.
+Sample Input
+
+3
+
+Sample Output
+
+VVHH VHVH VHHV VHD HVVH HVHV HVD HHVV DVH DHV DD 
+11
+
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        // Your Code Here
+		Scanner scn = new Scanner(System.in);
+        int N1= scn.nextInt();
+		ArrayList<String> list = new ArrayList<String>();
+		mazePath(N1,N1,0,0,"",list);
+		for(String ele: list){
+			System.out.print(ele+" ");
+		}
+		System.out.println();
+		System.out.println(list.size());
+    }
+	public static void mazePath(int R, int C, int r, int c,String path,ArrayList<String> list){
+		if(r==R-1 && c==C-1){
+			list.add(path);
+		}
+		if(r>=R || c>=C) return;
+		mazePath(R,C,r+1,c,path+"V",list);
+		mazePath(R,C,r,c+1,path+"H",list);
+		if(r==c || (r+c) == R-1 )
+		mazePath(R,C,r+1,c+1,path+"D",list);
+	}
+}
