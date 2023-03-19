@@ -1,0 +1,36 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> ans=new ArrayList<List<String>>();
+        ArrayList<String> list=new ArrayList<String>();
+        part(s,list,ans);
+        return ans;
+    }
+    public void part(String str, ArrayList<String> list, List<List<String>> ans){
+        int n=str.length();
+		if(n==0){
+			ArrayList<String> AL=new ArrayList<String>(list);
+            ans.add(AL);
+            return;
+		}
+        
+		for(int i=1;i<=n;i++){
+			String part=str.substring(0,i);
+			if(isPalindrome(part)){
+                list.add(part);
+				part(str.substring(i,n),list,ans);
+                list.remove(list.size()-1);
+			}
+		}
+	}
+    public boolean isPalindrome(String str){
+        int s=0;
+        int e=str.length()-1;
+        while(s<e){
+            if(str.charAt(s)!=str.charAt(e)){
+                return false;
+            }
+            s++;e--;
+        }
+        return true;
+    }
+}
